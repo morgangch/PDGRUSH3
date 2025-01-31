@@ -5,14 +5,14 @@
 ## Makefile
 ##
 
-NAME=UwU
-SRC=$(wildcard ./*.cpp ./src/*.cpp ./src/Display/*.cpp ./src/Module/*.cpp)
-CFLAGS=-Wall -Wextra -Werror -Iinclude -Isrc -Isrc/Display -Isrc/Module -I.
-CC=/usr/bin/g++
+NAME	=	UwU
+SRC	=	$(wildcard ./*.cpp ./src/*.cpp ./src/Display/*.cpp ./src/Module/*.cpp)
+CFLAGS	=	-Wall -Wextra -Werror -Iinclude -Isrc -Isrc/Display -Isrc/Module -I.
+CC	=	/usr/bin/g++
 
-all: $(NAME)
+all:	$(NAME)
 
-$(NAME): $(OBJ)
+$(NAME):	$(OBJ)
 	$(CC) $(CFLAGS) $(SRC) $(LDFLAGS) -o $(NAME)
 
 clean:
