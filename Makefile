@@ -16,7 +16,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(SRC) $(LDFLAGS) -o $(NAME)
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) *.gch src/*.gch src/Display/*.gch src/Module/*.gch
 
 fclean: clean
 	rm -f $(NAME)
