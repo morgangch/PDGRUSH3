@@ -27,7 +27,7 @@ jobs:
 
       # Create the reports directory
       - name: Create reports directory
-        run: mkdir -p ${ env.REPORTS_DIR }
+        run: mkdir -p ${ REPORTS_DIR }
 
       # Run the coding style checker in the container
       - name: Run coding style checker
