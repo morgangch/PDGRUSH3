@@ -1,0 +1,6 @@
+git checkout <nom> || git switch <nom>  // passe sur la branche <nom> | branches crées en cli || en web
+git checkout -b <nom>       // crée une nouvelle branche <nom>
+git push --set-upstream origin <nom>  // initie une nouvelle branche 
+git branch  // liste les branches connues localement
+git merge <nom> // merge la branche <nom> dans la branche actuelle, il faut quand même push après
+
