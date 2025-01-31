@@ -6,10 +6,16 @@
 */
 
 #include "DisplayManager.hpp"
+#include <stdio.h>
 
 DisplayManager::DisplayManager(bool tui)
 {
     _tui = tui;
+    if (_tui) {
+        printf("TUI mode\n");
+    } else {
+        printf("SFML mode\n");
+    }
 }
 
 DisplayManager::~DisplayManager()
@@ -25,4 +31,5 @@ int DisplayManager::display()
     } else {
         // display with sfml
     }
+    return 0;
 }

@@ -10,10 +10,11 @@
 
 int main(int ac, char **av)
 {
-    if (ac < 1)
+    if (ac == 1)
+        supervisor(false);
+    if (ac < 2)
         return 84;
-    if (av[1] == "--tui")
-        supervisor(1);
-    supervisor(0);
+    if (std::string(av[1]) == "--tui")
+        supervisor(true);
     return 0;
 }
