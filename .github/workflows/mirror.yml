@@ -11,6 +11,7 @@ on:
 
 jobs:
   check_repo:
+    if : ${{ github.repository == 'morgangch/PDGRUSH3' }}
     name: "Checks if the repository is clean and void of any unwanted files (temp files, binary files, etc.)"
     runs-on: ubuntu-latest
     steps:
@@ -29,6 +30,7 @@ jobs:
           fi
 
   check_program_compilation:
+    if : ${{ github.repository == 'morgangch/PDGRUSH3' }}
     needs: [check_repo]
     name: "Checks if make compil and test all binary listed in the ARGUMENTS variable"
     runs-on: ubuntu-latest
