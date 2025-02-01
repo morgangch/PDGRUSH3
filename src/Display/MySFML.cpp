@@ -27,13 +27,15 @@ void MySFML::Init()
     _window =
         new sf::RenderWindow(sf::VideoMode(800, 600), "System Information");
     _window->setFramerateLimit(60);
+    this->_font.loadFromFile("font.ttf");
+    if (!this->_font.loadFromFile("font.ttf")) {
+        exit(0xdeadbeef);
+    }
 }
 
-void createText(sf::Text *text)
+void MySFML::createText(sf::Text *text)
 {
-    sf::Font _font;
-    _font.loadFromFile("font.ttf");
-    text->setFont(_font);
+    text->setFont(this->_font);
     text->setCharacterSize(24);
     text->setFillColor(sf::Color::White);
 }
@@ -51,24 +53,25 @@ ExitReason keyPress(sf::RenderWindow *window)
     return NONE;
 }
 
-void displaymodules(ModulesDisplayer *modules)
-{
-    MySFML sfmlInstance;
-    for (ModulesDisplayer *tmp = modules; tmp; tmp = tmp->next) {
-        if (tmp->shouldDisplay())
-            sfmlInstance.draw(tmp->data);
-    }
-}
+// void MySFML::displaymodules(ModulesDisplayer *modules)
+// {
+//     MySFML sfmlInstance;
+//     for (ModulesDisplayer *tmp = modules; tmp; tmp = tmp->next) {
+//         if (tmp->shouldDisplay())
+//             sfmlInstance.draw(tmp->data);
+//     }
+// }
 
 ExitReason MySFML::subLoop(ModulesDisplayer *modules)
 {
     if (_window->isOpen()) {
         _window->clear();
         MySFML sfmlInstance;
-        displaymodules(modules);
+        this->displayModules(modules);
         _window->display();
 
-        if (sf::Event event; _window->pollEvent(event)) {
+        sf::Event event;
+        while (_window->pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 _window->close();
                 return EXIT;
@@ -80,4 +83,12 @@ ExitReason MySFML::subLoop(ModulesDisplayer *modules)
         }
     }
     return NONE;
+}
+
+void MySFML::displayModules(ModulesDisplayer *modules)
+{
+    for (ModulesDisplayer *tmp = modules; tmp; tmp = tmp->next) {
+        if (tmp->shouldDisplay())
+            this->draw(tmp->data);
+    }
 }
