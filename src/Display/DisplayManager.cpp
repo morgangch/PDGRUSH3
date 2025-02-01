@@ -13,6 +13,7 @@ DisplayManager::DisplayManager(DisplayLib displayLib)
     _displayLib = displayLib;
     _displayLibList = new DisplayLibList(NCURSES);
     currentDisplay = getDisplayWithLib(displayLib);
+    modules = new ModulesDisplayer;
 }
 
 DisplayManager::~DisplayManager()
@@ -72,12 +73,12 @@ void DisplayManager::loop()
 {
     ExitReason exitReason = NONE;
     while (exitReason == NONE) {
-        exitReason = currentDisplay->subLoop();
+        exitReason = currentDisplay->subLoop(modules);
     }
     if (exitReason == EXIT) {
         exit(0);
     } else if (exitReason == CHANGE_LIB) {
-        //sleep(1);
+        // sleep(1);
         if (_displayLib == NCURSES)
             setDisplayLib(SFML);
         else
@@ -85,4 +86,53 @@ void DisplayManager::loop()
         this->currentDisplay->Init();
         return loop();
     }
+}
+
+int ModulesDisplayer::getHighestY()
+{
+    int highestY = 0;
+    ModulesDisplayer *tmp = this;
+
+    for (ModulesDisplayer *tmp = this; tmp; tmp = tmp->_prev)
+        ;
+    while (tmp) {
+        if (tmp->data->y > highestY)
+            highestY = tmp->data->y;
+        tmp = tmp->next;
+    }
+    return highestY;
+}
+
+ModulesDisplayer::ModulesDisplayer(ModuleType type, ModulesDisplayer *prev)
+{
+    switch (type) {
+        case E_HOSTUSER:
+            module = new HostUser;
+            next = new ModulesDisplayer(E_OSKER, this);
+            break;
+        case E_OSKER:
+            module = new OSKer;
+            next = new ModulesDisplayer(E_DATIME, this);
+            break;
+        case E_DATIME:
+            module = new DaTime;
+            next = new ModulesDisplayer(E_CPU, this);
+            break;
+        case E_CPU:
+            module = new CPU;
+            next = new ModulesDisplayer(E_RAM, this);
+            break;
+        case E_RAM:
+            module = new RAM;
+            next = nullptr;
+            break;
+        default:
+            module = nullptr;
+            next = nullptr;
+            break;
+    }
+    data = module->getDatas();
+    data->y = getHighestY() + 1;
+    _prev = prev;
+    _isHidden = false;
 }

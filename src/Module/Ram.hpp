@@ -16,7 +16,7 @@ class RAM : public IModule {
     std::string getTotalRAM();
     std::string getFreeRAM();
     std::string getUsedRAM();
-    void draw(std::function<void(DataContainer *)> func) override;
+    DataContainer *getDatas();
 };
 
 #endif /* RAM_HPP_ */

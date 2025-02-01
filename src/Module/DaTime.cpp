@@ -25,14 +25,21 @@ void DaTime::fetchData()
     dateTime = std::string(buffer);
 }
 
-void DaTime::draw(std::function<void(DataContainer*)> func)
-{
-    fetchData();
-    DataContainer *data(new DataContainer(2, 10, dateTime));
-    func(data);
-}
+// void DaTime::draw(std::function<void(DataContainer*)> func)
+// {
+//     fetchData();
+//     DataContainer *data(new DataContainer(0, 10, dateTime));
+//     func(data);
+// }
 
 std::string DaTime::getDateTime() const
 {
     return dateTime;
+}
+
+DataContainer *DaTime::getDatas()
+{
+    fetchData();
+    DataContainer *data(new DataContainer(0, 10, dateTime));
+    return data;
 }

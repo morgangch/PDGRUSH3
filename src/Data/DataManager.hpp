@@ -1,11 +1,13 @@
 /*
 ** EPITECH PROJECT, 2025
-** B-PDG-300-MPL-3-1-PDGRUSH3-morgan.guichard
+** PDGRUSH3
 ** File description:
-** DataManager.hpp
+** DataManager
 */
 
-#pragma once
+#ifndef DATAMANAGER_HPP_
+#define DATAMANAGER_HPP_
+
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -80,3 +82,5 @@ class DataManager {
     std::string getFreeRAM();
     std::string getUsedRAM();
 };
+
+#endif /* !DATAMANAGER_HPP_ */

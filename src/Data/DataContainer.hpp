@@ -19,6 +19,7 @@ class DataContainer {
         int x;
         int y;
         std::string &value;
+        DataContainer *next;
     protected:
     private:
 };

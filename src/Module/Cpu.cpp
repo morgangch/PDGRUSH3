@@ -64,9 +64,16 @@ std::string CPU::getCPUUsage()
     return "N/A";
 }
 
-void CPU::draw(std::function<void(DataContainer*)> func)
+// void CPU::draw(std::function<void(DataContainer*)> func)
+// {
+//     std::string cpuModel = getCPUModel();
+//     DataContainer *data(new DataContainer(0, 10, cpuModel));
+//     func(data);
+// }
+
+DataContainer *CPU::getDatas()
 {
     std::string cpuModel = getCPUModel();
-    DataContainer *data(new DataContainer(2, 10, cpuModel));
-    func(data);
+    DataContainer *data(new DataContainer(0, 10, cpuModel));
+    return data;
 }

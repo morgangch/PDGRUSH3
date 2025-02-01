@@ -13,6 +13,4 @@
 
 int supervisor(bool tui);
 
-
-
 #endif /* !SUPERVISOR_HPP_ */

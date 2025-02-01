@@ -13,15 +13,15 @@
 #include <functional>
 
 class DaTime : public IModule {
-    public:
-        DaTime();
-        ~DaTime();
-        void draw(std::function<void(DataContainer*)> func) override;
-        std::string getDateTime() const;
+  public:
+    DaTime();
+    ~DaTime();
+    DataContainer *getDatas();
+    std::string getDateTime() const;
 
-    private:
-        std::string dateTime;
-        void fetchData();
+  private:
+    std::string dateTime;
+    void fetchData();
 };
 
 #endif /* !DATIME_HPP_ */

@@ -12,17 +12,17 @@
 #include <string>
 
 class OSKer : public IModule {
-    public:
-        OSKer();
-        ~OSKer();
-        void draw(std::function<void(DataContainer*)> func) override;
-        std::string getOSName() const;
-        std::string getKernelVersion() const;
+  public:
+    OSKer();
+    ~OSKer();
+    std::string getOSName() const;
+    std::string getKernelVersion() const;
+    DataContainer *getDatas();
 
-    private:
-        std::string osName;
-        std::string kernelVersion;
-        void fetchData();
+  private:
+    std::string osName;
+    std::string kernelVersion;
+    void fetchData();
 };
 
 #endif /* !OSKER_HPP_ */

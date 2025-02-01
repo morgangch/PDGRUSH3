@@ -15,24 +15,22 @@
 #include "./Module/Cpu.hpp"
 #include "./Module/Ram.hpp"
 
-enum ExitReason {
-    EXIT,
-    CHANGE_LIB,
-    NONE
-};
+enum ExitReason { EXIT, CHANGE_LIB, NONE };
 
 class IDisplay : public Krell {
   public:
     virtual ~IDisplay() = default;
     virtual void draw(DataContainer *data) = 0;
     virtual void Init() = 0;
-    virtual ExitReason subLoop() = 0;
+    virtual ExitReason subLoop(ModulesDisplayer *modules) = 0;
+
   protected:
-      HostUser hostUser;
-      OSKer osKer;
-      DaTime daTime;
-      CPU cpu;
-      RAM ram;
+    HostUser hostUser;
+    OSKer osKer;
+    DaTime daTime;
+    CPU cpu;
+    RAM ram;
+
   private:
 };
 

@@ -43,14 +43,21 @@ ExitReason keyPress(sf::RenderWindow *window)
     return NONE;
 }
 
-ExitReason MySFML::subLoop()
+void displaymodules(ModulesDisplayer *modules)
+{
+    MySFML sfmlInstance;
+    for (ModulesDisplayer *tmp = modules; tmp; tmp = tmp->next) {
+        if (tmp->shouldDisplay())
+            sfmlInstance.draw(tmp->data);
+    }
+}
+
+ExitReason MySFML::subLoop(ModulesDisplayer *modules)
 {
     if (_window->isOpen()) {
         _window->clear();
         MySFML sfmlInstance;
-        daTime.draw([&sfmlInstance](DataContainer *data) {
-            sfmlInstance.draw(data);
-        });
+        displaymodules(modules);
         _window->display();
 
         if (sf::Event event; _window->pollEvent(event)) {

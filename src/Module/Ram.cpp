@@ -49,17 +49,28 @@ std::string RAM::getUsedRAM()
     return std::to_string(used) + " kB";
 }
 
-void RAM::draw(std::function<void(DataContainer *)> func)
+// void RAM::draw(std::function<void(DataContainer *)> func)
+// {
+//     std::string total = getTotalRAM();
+//     DataContainer *data(new DataContainer(2, 10, total));
+//     func(data);
+//     data->value = getFreeRAM();
+//     data->x = 3;
+//     data->y = 10;
+//     func(data);
+//     data->value = getUsedRAM();
+//     data->x = 4;
+//     data->y = 10;
+//     func(data);
+// }
+
+DataContainer *RAM::getDatas()
 {
     std::string total = getTotalRAM();
-    DataContainer *data(new DataContainer(2, 10, total));
-    func(data);
-    data->value = getFreeRAM();
-    data->x = 3;
-    data->y = 10;
-    func(data);
-    data->value = getUsedRAM();
-    data->x = 4;
-    data->y = 10;
-    func(data);
+    std::string free = getFreeRAM();
+    std::string used = getUsedRAM();
+    DataContainer *data(new DataContainer(0, 10, total));
+    data->next = new DataContainer(0, 10, free);
+    data->next->next = new DataContainer(0, 10, used);
+    return data;
 }

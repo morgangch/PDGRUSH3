@@ -13,13 +13,16 @@
 
 class CPU : public IModule {
   public:
-    CPU() {getCPUModel(), getCPUCores(), getCPUFrequency(), getCPUUsage();};
+    CPU()
+    {
+        getCPUModel(), getCPUCores(), getCPUFrequency(), getCPUUsage();
+    };
     ~CPU() = default;
     std::string getCPUModel();
     std::string getCPUCores();
     std::string getCPUFrequency();
     std::string getCPUUsage();
-    void draw(std::function<void(DataContainer *)> func) override;
+    DataContainer *getDatas();
 };
 
 #endif /* CPU_HPP_ */

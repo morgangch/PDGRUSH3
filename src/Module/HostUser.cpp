@@ -25,15 +25,15 @@ void HostUser::fetchData()
     username = (pw) ? std::string(pw->pw_name) : "Unknown";
 }
 
-void HostUser::draw(std::function<void(DataContainer*)> func)
-{
-    DataContainer *data(new DataContainer(2, 10, hostname));
-    func(data);
-    data->value = username;
-    data->x = 3;
-    data->y = 10;
-    func(data);
-}
+// void HostUser::draw(std::function<void(DataContainer*)> func)
+// {
+//     DataContainer *data(new DataContainer(2, 10, hostname));
+//     func(data);
+//     data->value = username;
+//     data->x = 3;
+//     data->y = 10;
+//     func(data);
+// }
 
 std::string HostUser::getHostname() const
 {
@@ -43,4 +43,12 @@ std::string HostUser::getHostname() const
 std::string HostUser::getUsername() const
 {
     return username;
+}
+
+DataContainer *HostUser::getDatas()
+{
+    fetchData();
+    DataContainer *data(new DataContainer(0, 10, hostname));
+    data->next = new DataContainer(0, 10, username);
+    return data;
 }

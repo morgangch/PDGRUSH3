@@ -14,7 +14,6 @@ MyNCurses::MyNCurses()
     noecho();
     curs_set(0);
     timeout(500);
-    _isRunning = true;
 }
 
 MyNCurses::~MyNCurses()
@@ -22,29 +21,13 @@ MyNCurses::~MyNCurses()
     endwin();
 }
 
-void displayModules()
+void displayModules(ModulesDisplayer *modules)
 {
-    HostUser hostUser;
-    OSKer osKer;
-    DaTime daTime;
-    CPU cpu;
-    RAM ram;
-    MySFML sfmlInstance;
-    hostUser.draw([&sfmlInstance](DataContainer *data) {
-        sfmlInstance.draw(data);
-    });
-    osKer.draw([&sfmlInstance](DataContainer *data) {
-        sfmlInstance.draw(data);
-    });
-    daTime.draw([&sfmlInstance](DataContainer *data) {
-        sfmlInstance.draw(data);
-    });
-    cpu.draw([&sfmlInstance](DataContainer *data) {
-        sfmlInstance.draw(data);
-    });
-    ram.draw([&sfmlInstance](DataContainer *data) {
-        sfmlInstance.draw(data);
-    });
+    MyNCurses ncursesInstance;
+    for (ModulesDisplayer *tmp = modules; tmp; tmp = tmp->next) {
+        if (tmp->shouldDisplay())
+            ncursesInstance.draw(tmp->data);
+    }
 }
 
 void MyNCurses::draw(DataContainer *data)
@@ -60,12 +43,10 @@ void MyNCurses::Init()
     curs_set(0);
 }
 
-ExitReason MyNCurses::subLoop()
+ExitReason MyNCurses::subLoop(ModulesDisplayer *modules)
 {
     MyNCurses ncursesInstance;
-    daTime.draw([&ncursesInstance](DataContainer *data) {
-        ncursesInstance.draw(data);
-    });
+    displayModules(modules);
     refresh();
 
     int ch = getch();
@@ -77,15 +58,5 @@ ExitReason MyNCurses::subLoop()
         endwin();
         return CHANGE_LIB;
     }
-    if (ch == '1')
-        _showName = !_showName;
-    else if (ch == '2')
-        _showOS = !_showOS;
-    else if (ch == '3')
-        _showDateTime = !_showDateTime;
-    else if (ch == '4')
-        _showCPU = !_showCPU;
-    else if (ch == '5')
-        _showRAM = !_showRAM;
     return NONE;
 }

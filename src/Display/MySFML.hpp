@@ -21,7 +21,7 @@ class MySFML : virtual public IDisplay {
         ~MySFML() = default;
         virtual void draw(DataContainer *data) override;
         void Init() override;
-        ExitReason subLoop() override;
+        ExitReason subLoop(ModulesDisplayer *modules) override;
     protected:
     private:
         sf::RenderWindow *_window;

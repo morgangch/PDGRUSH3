@@ -15,23 +15,14 @@
 #include "../Module/DaTime.hpp"
 
 class MyNCurses : public IDisplay {
-    public:
-        MyNCurses();
-        ~MyNCurses();
-        void draw(DataContainer *data) override;
-        void Init() override;
-        ExitReason subLoop() override;
-    private:
-    bool _isRunning;
-    bool _showName = true;
-    bool _showOS = true;
-    bool _showDateTime = true;
+  public:
+    MyNCurses();
+    ~MyNCurses();
+    void draw(DataContainer *data) override;
+    void Init() override;
+    ExitReason subLoop(ModulesDisplayer *modules) override;
 
-    bool _showCPU = true;
-
-    bool _showRAM = true;
-
-    int _yPos = 4;
+  private:
 };
 
 #endif /* !MYNCURSES_HPP_ */

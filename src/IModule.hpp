@@ -27,12 +27,11 @@ class IModule : public Krell {
   public:
     IModule();
     ~IModule();
-    virtual void draw(std::function<void(DataContainer*)> func) = 0;
     Coordinates top_left;
     Coordinates bottom_right;
     int width;
     int height;
-
+    DataContainer *getDatas();
   protected:
   private:
 };

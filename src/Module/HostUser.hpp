@@ -15,17 +15,17 @@
 #include <pwd.h>
 
 class HostUser : public IModule {
-    public:
-        HostUser();
-        ~HostUser();
-        void draw(std::function<void(DataContainer*)> func) override;
-        std::string getHostname() const;
-        std::string getUsername() const;
+  public:
+    HostUser();
+    ~HostUser();
+    std::string getHostname() const;
+    std::string getUsername() const;
+    DataContainer *getDatas();
 
-    private:
-        std::string hostname;
-        std::string username;
-        void fetchData();
+  private:
+    std::string hostname;
+    std::string username;
+    void fetchData();
 };
 
 #endif /* !HOSTUSER_HPP_ */
