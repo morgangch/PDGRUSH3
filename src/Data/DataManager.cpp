@@ -93,11 +93,6 @@ std::string DataManager::getData(DataType type)
     return tmp->data;
 }
 
-void DataManager::Refresh()
-{
-    getDatavalues();
-}
-
 void DataManager::getDatavalues()
 {
     setData(Hostname, getHostname());
@@ -115,6 +110,11 @@ void DataManager::getDatavalues()
     setData(TotalRAM, getTotalRAM());
     setData(FreeRAM, getFreeRAM());
     setData(UsedRAM, getUsedRAM());
+}
+
+void DataManager::Refresh()
+{
+    getDatavalues();
 }
 
 void DataManager::RefreshHost()
@@ -150,6 +150,9 @@ void DataManager::RefreshRAM()
     setData(FreeRAM, getFreeRAM());
     setData(UsedRAM, getUsedRAM());
 }
+
+
+// Fonctions to get the data
 
 std::string DataManager::getHostname()
 {
