@@ -55,13 +55,15 @@ IDisplay *DisplayManager::getDisplayWithLib(DisplayLib displayLib)
     const DisplayLibList *tmp = _displayLibList;
 
     while (tmp->displayLib != displayLib)
-        tmp = tmp->next;
+        if (tmp->next == nullptr)
+            return nullptr;
+        else
+            tmp = tmp->next;
     return tmp->display;
 }
 
 void DisplayManager::setDisplayLib(DisplayLib displayLib)
 {
-    std::cout << "Changing lib : " << ((displayLib == NCURSES) ? "NCURSES" : "SFML") << std::endl;
     currentDisplay = getDisplayWithLib(displayLib);
     _displayLib = displayLib;
 }
@@ -75,11 +77,11 @@ void DisplayManager::loop()
     if (exitReason == EXIT) {
         exit(0);
     } else if (exitReason == CHANGE_LIB) {
-        if (_displayLib == NCURSES) {
+        sleep(1);
+        if (_displayLib == NCURSES)
             setDisplayLib(SFML);
-        } else {
+        else
             setDisplayLib(NCURSES);
-        }
         this->currentDisplay->Init();
         return loop();
     }

@@ -12,6 +12,8 @@
 #include "./Module/HostUser.hpp"
 #include "./Module/OSKer.hpp"
 #include "./Module/DaTime.hpp"
+#include "./Module/Cpu.hpp"
+#include "./Module/Ram.hpp"
 
 enum ExitReason {
     EXIT,
@@ -29,6 +31,8 @@ class IDisplay : public Krell {
       HostUser hostUser;
       OSKer osKer;
       DaTime daTime;
+      CPU cpu;
+      RAM ram;
   private:
 };
 
