@@ -24,11 +24,11 @@ void MySFML::Init()
 {
     _window =
         new sf::RenderWindow(sf::VideoMode(800, 600), "System Information");
+    _window->setFramerateLimit(60);
 }
 
 ExitReason MySFML::subLoop()
 {
-
     if (_window->isOpen()) {
         _window->clear();
         draw();
