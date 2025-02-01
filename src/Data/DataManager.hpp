@@ -31,20 +31,28 @@ enum DataType {
     Root
 };
 
-template <typename T> class Datadictionnary {
+template <typename T>
+class Datadictionnary {
   public:
     Datadictionnary();
+    Datadictionnary(T data, DataType type);
     ~Datadictionnary();
     T *data;
     DataType type;
     Datadictionnary *next;
 };
 
+template <typename T>
 class DataManager {
   public:
     DataManager();
     ~DataManager();
+    void addData(DataType type, T data);
+    void removeData(DataType type);
+    void setData(DataType type, T data);
+    T getData(DataType type);
 
   protected:
   private:
+    Datadictionnary<T> *_data;
 };
