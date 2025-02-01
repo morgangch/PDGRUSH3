@@ -9,12 +9,14 @@
 #define RAM_HPP_
 
 #include <string>
+#include "IModule.hpp"
 
-class RAM {
-public:
-    static std::string getTotalRAM();
-    static std::string getFreeRAM();
-    static std::string getUsedRAM();
+class RAM : public IModule {
+  public:
+    std::string getTotalRAM();
+    std::string getFreeRAM();
+    std::string getUsedRAM();
+    void draw(std::function<void(DataContainer *)> func) override;
 };
 
 #endif /* RAM_HPP_ */

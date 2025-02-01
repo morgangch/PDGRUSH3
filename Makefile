@@ -7,7 +7,7 @@
 
 NAME	=	MyGKrellm
 SRC	=	$(wildcard ./*.cpp ./src/*.cpp ./src/Display/*.cpp ./src/Module/*.cpp ./src/Data/*.cpp)
-CFLAGS	=	-Wall -Wextra -Werror -Iinclude -Isrc -Isrc/Display -Isrc/Module -I.
+CFLAGS	=	-Wall -Wextra -Werror -Iinclude -Isrc -Isrc/Display -Isrc/Module -I. -Isrc/Data
 LDFLAGS	=	-lncurses -lsfml-graphics -lsfml-window -lsfml-system
 CC	=	/usr/bin/g++
 
@@ -23,3 +23,6 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+debug: CFLAGS += -g3
+debug: re

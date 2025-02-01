@@ -22,41 +22,35 @@ MyNCurses::~MyNCurses()
     endwin();
 }
 
-void MyNCurses::draw()
+void displayModules()
 {
-    clear();
-    _yPos = 4;
+    HostUser hostUser;
+    OSKer osKer;
+    DaTime daTime;
+    CPU cpu;
+    RAM ram;
+    MySFML sfmlInstance;
+    hostUser.draw([&sfmlInstance](DataContainer *data) {
+        sfmlInstance.draw(data);
+    });
+    osKer.draw([&sfmlInstance](DataContainer *data) {
+        sfmlInstance.draw(data);
+    });
+    daTime.draw([&sfmlInstance](DataContainer *data) {
+        sfmlInstance.draw(data);
+    });
+    cpu.draw([&sfmlInstance](DataContainer *data) {
+        sfmlInstance.draw(data);
+    });
+    ram.draw([&sfmlInstance](DataContainer *data) {
+        sfmlInstance.draw(data);
+    });
+}
 
-    mvprintw(2, 2, "System Information");
-    
-    if (_showName) {
-        mvprintw(_yPos++, 2, "Hostname: %s", hostUser.getHostname().c_str());
-        mvprintw(_yPos++, 2, "Username: %s", hostUser.getUsername().c_str());
-        _yPos += 2;
-    }
-    if (_showOS) {
-        mvprintw(_yPos++, 2, "OS: %s", osKer.getOSName().c_str());
-        mvprintw(_yPos++, 2, "Kernel: %s", osKer.getKernelVersion().c_str());
-        _yPos += 2;
-    }
-    if (_showDateTime) {
-        mvprintw(_yPos++, 2, "Date & Time: %s", daTime.getDateTime().c_str());
-        _yPos += 2;
-    }
-    if (_showCPU) {
-        mvprintw(_yPos++, 2, "CPU Model: %s", cpu.getCPUModel().c_str());
-        mvprintw(_yPos++, 2, "CPU Cores: %s", cpu.getCPUCores().c_str());
-        mvprintw(_yPos++, 2, "CPU Frequency: %s", cpu.getCPUFrequency().c_str());
-        mvprintw(_yPos++, 2, "CPU Usage: %s", cpu.getCPUUsage().c_str());
-        _yPos += 2;
-    }
-    if (_showRAM) {
-        mvprintw(_yPos++, 2, "Total RAM: %s", ram.getTotalRAM().c_str());
-        mvprintw(_yPos++, 2, "Used RAM: %s", ram.getUsedRAM().c_str());
-        mvprintw(_yPos++, 2, "Free RAM: %s", ram.getFreeRAM().c_str());
-        _yPos += 2;
-    }
-    refresh();
+void MyNCurses::draw(DataContainer *data)
+{
+    if (data)
+        mvprintw(data->x, data->y, "%s\n", (data->value).c_str());
 }
 
 void MyNCurses::Init()
@@ -68,7 +62,10 @@ void MyNCurses::Init()
 
 ExitReason MyNCurses::subLoop()
 {
-    draw();
+    MyNCurses ncursesInstance;
+    daTime.draw([&ncursesInstance](DataContainer *data) {
+        ncursesInstance.draw(data);
+    });
     refresh();
 
     int ch = getch();

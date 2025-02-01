@@ -11,13 +11,16 @@ MySFML::MySFML()
 {
 }
 
-void MySFML::draw()
+void MySFML::draw(DataContainer *data)
 {
-    sf::Text text;
-    text.setString("Hostname: " + hostUser.getHostname());
-    text.setFillColor(sf::Color::Red);
-    text.setPosition(100, 100);
-    _window->draw(text);
+    if (data) {
+        sf::Text text;
+        text.setString(data->value);
+        text.setCharacterSize(24);
+        text.setFillColor(sf::Color::White);
+        text.setPosition(data->x, data->y);
+        _window->draw(text);
+    }
 }
 
 void MySFML::Init()
@@ -27,24 +30,37 @@ void MySFML::Init()
     _window->setFramerateLimit(60);
 }
 
+ExitReason keyPress(sf::RenderWindow *window)
+{
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+        window->close();
+        return EXIT;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
+        window->close();
+        return CHANGE_LIB;
+    }
+    return NONE;
+}
+
 ExitReason MySFML::subLoop()
 {
     if (_window->isOpen()) {
         _window->clear();
-        draw();
+        MySFML sfmlInstance;
+        daTime.draw([&sfmlInstance](DataContainer *data) {
+            sfmlInstance.draw(data);
+        });
         _window->display();
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-            _window->close();
-            return EXIT;
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
-            _window->close();
-            return CHANGE_LIB;
-        }
+
         if (sf::Event event; _window->pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 _window->close();
                 return EXIT;
+            }
+            if (event.type == sf::Event::KeyPressed
+                && keyPress(_window) != NONE) {
+                return keyPress(_window);
             }
         }
     }

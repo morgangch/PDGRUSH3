@@ -29,14 +29,14 @@ void OSKer::fetchData()
     }
 }
 
-void OSKer::display()
+void OSKer::draw(std::function<void(DataContainer*)> func)
 {
-    std::cout << "OS: " << osName << "\nKernel: " << kernelVersion << std::endl;
-}
-
-void OSKer::draw()
-{
-    display();
+    DataContainer *data(new DataContainer(2, 10, osName));
+    func(data);
+    data->value = kernelVersion;
+    data->x = 3;
+    data->y = 10;
+    func(data);
 }
 
 std::string OSKer::getOSName() const

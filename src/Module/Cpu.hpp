@@ -9,13 +9,17 @@
 #define CPU_HPP_
 
 #include <string>
+#include "IModule.hpp"
 
-class CPU {
-public:
-    static std::string getCPUModel();
-    static std::string getCPUCores();
-    static std::string getCPUFrequency();
-    static std::string getCPUUsage();
+class CPU : public IModule {
+  public:
+    CPU() {getCPUModel(), getCPUCores(), getCPUFrequency(), getCPUUsage();};
+    ~CPU() = default;
+    std::string getCPUModel();
+    std::string getCPUCores();
+    std::string getCPUFrequency();
+    std::string getCPUUsage();
+    void draw(std::function<void(DataContainer *)> func) override;
 };
 
 #endif /* CPU_HPP_ */

@@ -9,14 +9,13 @@
 #define KRELL_HPP_
 
 #include <iostream>
+#include "DataContainer.hpp"
 
 class Krell {
     public:
         virtual ~Krell() = default;
         class IModule {};
         class IDisplay {};
-        virtual void draw() = 0;
-
     protected:
         //virtual bool _isTui() = 0; // TUI = Text User Interface || If true, use nCurses, else use SFML
 };

@@ -8,6 +8,7 @@
 #include "DaTime.hpp"
 #include <iostream>
 #include <ctime>
+#include "DataContainer.hpp"
 
 DaTime::DaTime()
 {
@@ -24,15 +25,11 @@ void DaTime::fetchData()
     dateTime = std::string(buffer);
 }
 
-void DaTime::display()
-{
-    std::cout << "Date & Time: " << dateTime << std::endl;
-}
-
-void DaTime::draw()
+void DaTime::draw(std::function<void(DataContainer*)> func)
 {
     fetchData();
-    display();
+    DataContainer *data(new DataContainer(2, 10, dateTime));
+    func(data);
 }
 
 std::string DaTime::getDateTime() const

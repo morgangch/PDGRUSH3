@@ -10,13 +10,13 @@
 
 #include "../IModule.hpp"
 #include <string>
+#include <functional>
 
 class DaTime : public IModule {
     public:
         DaTime();
         ~DaTime();
-        void display() override;
-        void draw() override;
+        void draw(std::function<void(DataContainer*)> func) override;
         std::string getDateTime() const;
 
     private:

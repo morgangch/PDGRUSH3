@@ -24,7 +24,7 @@ enum ExitReason {
 class IDisplay : public Krell {
   public:
     virtual ~IDisplay() = default;
-    virtual void draw() = 0;
+    virtual void draw(DataContainer *data) = 0;
     virtual void Init() = 0;
     virtual ExitReason subLoop() = 0;
   protected:

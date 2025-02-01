@@ -18,7 +18,7 @@ class MyNCurses : public IDisplay {
     public:
         MyNCurses();
         ~MyNCurses();
-        void draw() override;
+        void draw(DataContainer *data) override;
         void Init() override;
         ExitReason subLoop() override;
     private:

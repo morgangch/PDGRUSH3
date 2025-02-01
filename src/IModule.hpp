@@ -9,6 +9,8 @@
 #define IMODULE_HPP_
 
 #include "Krell.hpp"
+#include "DataContainer.hpp"
+#include <functional>
 
 class Coordinates {
   public:
@@ -25,12 +27,11 @@ class IModule : public Krell {
   public:
     IModule();
     ~IModule();
-    virtual void draw() = 0;
+    virtual void draw(std::function<void(DataContainer*)> func) = 0;
     Coordinates top_left;
     Coordinates bottom_right;
     int width;
     int height;
-    virtual void display() = 0;
 
   protected:
   private:

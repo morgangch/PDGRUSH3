@@ -77,7 +77,7 @@ void DisplayManager::loop()
     if (exitReason == EXIT) {
         exit(0);
     } else if (exitReason == CHANGE_LIB) {
-        sleep(1);
+        //sleep(1);
         if (_displayLib == NCURSES)
             setDisplayLib(SFML);
         else

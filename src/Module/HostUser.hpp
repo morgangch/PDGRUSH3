@@ -18,8 +18,7 @@ class HostUser : public IModule {
     public:
         HostUser();
         ~HostUser();
-        void display() override;
-        void draw() override;
+        void draw(std::function<void(DataContainer*)> func) override;
         std::string getHostname() const;
         std::string getUsername() const;
 

@@ -19,7 +19,7 @@ class MySFML : virtual public IDisplay {
     public:
         MySFML();
         ~MySFML() = default;
-        void draw() override;
+        virtual void draw(DataContainer *data) override;
         void Init() override;
         ExitReason subLoop() override;
     protected:

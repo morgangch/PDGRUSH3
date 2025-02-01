@@ -15,8 +15,7 @@ class OSKer : public IModule {
     public:
         OSKer();
         ~OSKer();
-        void display() override;
-        void draw() override;
+        void draw(std::function<void(DataContainer*)> func) override;
         std::string getOSName() const;
         std::string getKernelVersion() const;
 

@@ -25,14 +25,14 @@ void HostUser::fetchData()
     username = (pw) ? std::string(pw->pw_name) : "Unknown";
 }
 
-void HostUser::display()
+void HostUser::draw(std::function<void(DataContainer*)> func)
 {
-    std::cout << "Hostname: " << hostname << "\nUsername: " << username << std::endl;
-}
-
-void HostUser::draw()
-{
-    display();
+    DataContainer *data(new DataContainer(2, 10, hostname));
+    func(data);
+    data->value = username;
+    data->x = 3;
+    data->y = 10;
+    func(data);
 }
 
 std::string HostUser::getHostname() const
