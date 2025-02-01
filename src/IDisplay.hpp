@@ -9,12 +9,26 @@
 #define IDISPLAY_HPP_
 
 #include "../Krell.hpp"
+#include "./Module/HostUser.hpp"
+#include "./Module/OSKer.hpp"
+#include "./Module/DaTime.hpp"
+
+enum ExitReason {
+    EXIT,
+    CHANGE_LIB,
+    NONE
+};
 
 class IDisplay : public Krell {
   public:
     virtual ~IDisplay() = default;
     virtual void draw() = 0;
+    virtual void Init() = 0;
+    virtual ExitReason subLoop() = 0;
   protected:
+      HostUser hostUser;
+      OSKer osKer;
+      DaTime daTime;
   private:
 };
 

@@ -9,9 +9,6 @@
 
 MyNCurses::MyNCurses()
 {
-    initscr();
-    noecho();
-    curs_set(0);
 }
 
 MyNCurses::~MyNCurses()
@@ -21,8 +18,6 @@ MyNCurses::~MyNCurses()
 
 void MyNCurses::draw()
 {
-    clear();
-
     mvprintw(2, 2, "System Information");
     mvprintw(4, 2, "Hostname: %s", hostUser.getHostname().c_str());
     mvprintw(5, 2, "Username: %s", hostUser.getUsername().c_str());
@@ -30,9 +25,28 @@ void MyNCurses::draw()
     mvprintw(8, 2, "Kernel: %s", osKer.getKernelVersion().c_str());
     mvprintw(10, 2, "Date & Time: %s", daTime.getDateTime().c_str());
 
+}
+
+void MyNCurses::Init()
+{
+    initscr();
+    noecho();
+    curs_set(0);
+}
+
+ExitReason MyNCurses::subLoop()
+{
+    draw();
     refresh();
 
     int ch = getch();
-    if (ch == 'q')
-        return;
+    if (ch == 'q') {
+        endwin();
+        return EXIT;
+    }
+    if (ch == 'c') {
+        endwin();
+        return CHANGE_LIB;
+    }
+    return NONE;
 }
