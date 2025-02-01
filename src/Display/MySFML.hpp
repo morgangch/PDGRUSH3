@@ -9,12 +9,18 @@
 #define MYSFML_HPP_
 
 #include "DisplayManager.hpp"
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include "../Module/HostUser.hpp"
+#include "../Module/OSKer.hpp"
+#include "../Module/DaTime.hpp"
 
 class MySFML : virtual public IDisplay {
     public:
         MySFML();
         ~MySFML() = default;
-        void draw();
+        void draw() override;
+        void Init() override;
 
     protected:
     private:

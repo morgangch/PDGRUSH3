@@ -8,7 +8,7 @@
 #ifndef IMODULE_HPP_
 #define IMODULE_HPP_
 
-#include "../Krell.hpp"
+#include "Krell.hpp"
 
 class Coordinates {
   public:

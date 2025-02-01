@@ -8,7 +8,7 @@
 NAME	=	MyGKrellm
 SRC	=	$(wildcard ./*.cpp ./src/*.cpp ./src/Display/*.cpp ./src/Module/*.cpp ./src/Data/*.cpp)
 CFLAGS	=	-Wall -Wextra -Werror -Iinclude -Isrc -Isrc/Display -Isrc/Module -I.
-LDFLAGS	=	-lncurses
+LDFLAGS	=	-lncurses -lsfml-graphics -lsfml-window -lsfml-system
 CC	=	/usr/bin/g++
 
 all:	$(NAME)

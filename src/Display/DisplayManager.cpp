@@ -12,7 +12,7 @@ DisplayManager::DisplayManager(DisplayLib displayLib)
 {
     _displayLib = displayLib;
     _displayLibList = new DisplayLibList(NCURSES);
-    currentDisplay = _displayLibList->display;
+    currentDisplay = getDisplayWithLib(displayLib);
 }
 
 DisplayManager::~DisplayManager()

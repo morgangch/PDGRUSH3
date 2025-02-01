@@ -19,11 +19,8 @@ class MyNCurses : public IDisplay {
         MyNCurses();
         ~MyNCurses();
         void draw() override;
-
+        void Init() override;
     private:
-        HostUser hostUser;
-        OSKer osKer;
-        DaTime daTime;
 };
 
 #endif /* !MYNCURSES_HPP_ */

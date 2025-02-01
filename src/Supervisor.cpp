@@ -11,5 +11,7 @@
 int supervisor(bool tui)
 {
     DisplayManager displayManager(tui ? NCURSES : SFML);
+    displayManager.getDisplay()->Init();
+    displayManager.loop();
     return 0;
 }
