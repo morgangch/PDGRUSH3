@@ -7,11 +7,44 @@
 
 #pragma once
 
-class DataManager {
-    public:
-        DataManager();
-        ~DataManager();
+enum DataType {
+    Hostname,
+    username,
+    OS_name,
+    kernel_version,
+    Date,
+    Hour,
+    Minute,
+    Second,
+    Uptime,
+    CPU,
+    RAM,
+    Swap,
+    Disk,
+    Network,
+    Temperature,
+    Fan,
+    Voltage,
+    Load,
+    Process,
+    User,
+    Root
+};
 
-    protected:
-    private:
+template <typename T> class Datadictionnary {
+  public:
+    Datadictionnary();
+    ~Datadictionnary();
+    T *data;
+    DataType type;
+    Datadictionnary *next;
+};
+
+class DataManager {
+  public:
+    DataManager();
+    ~DataManager();
+
+  protected:
+  private:
 };
