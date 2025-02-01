@@ -120,6 +120,7 @@ void DataManager::Refresh()
 void DataManager::RefreshHost()
 {
     setData(Hostname, getHostname());
+    setData(username, getUsername());
 }
 
 void DataManager::RefreshOS()
@@ -138,15 +139,12 @@ void DataManager::RefreshDate()
 
 void DataManager::RefreshCPU()
 {
-    setData(CPUModel, getCPUModel());
-    setData(CPUCores, getCPUCores());
     setData(CPUFrequency, getCPUFrequency());
     setData(CPUUsage, getCPUUsage());
 }
 
 void DataManager::RefreshRAM()
 {
-    setData(TotalRAM, getTotalRAM());
     setData(FreeRAM, getFreeRAM());
     setData(UsedRAM, getUsedRAM());
 }
