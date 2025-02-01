@@ -31,6 +31,7 @@ void DaTime::display()
 
 void DaTime::draw()
 {
+    fetchData();
     display();
 }
 
