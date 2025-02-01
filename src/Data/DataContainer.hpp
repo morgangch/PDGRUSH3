@@ -13,7 +13,7 @@
 
 class DataContainer {
     public:
-        DataContainer(int x = 0, int y = 0, std::string &value = (std::string &)"") : x(x), y(y), value(value) {};
+        DataContainer(int x = 0, int y = 0, const std::string &value = std::string()) : x(x), y(y), value(const_cast<std::string&>(value)) {};
         DataContainer() = default;
         ~DataContainer() = default;
         int x;
