@@ -17,7 +17,7 @@ class DaTime : public IModule {
         ~DaTime();
         void display() override;
         void draw() override;
-        std::string getDateTime() const;  // ✅ Added Getter
+        std::string getDateTime() const;
 
     private:
         std::string dateTime;
