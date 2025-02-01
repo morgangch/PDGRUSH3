@@ -13,7 +13,7 @@ DisplayManager::DisplayManager(DisplayLib displayLib)
     _displayLib = displayLib;
     _displayLibList = new DisplayLibList(NCURSES);
     currentDisplay = getDisplayWithLib(displayLib);
-    modules = new ModulesDisplayer;
+    modules = new ModulesDisplayer(E_HOSTUSER, nullptr);
 }
 
 DisplayManager::~DisplayManager()
@@ -78,7 +78,6 @@ void DisplayManager::loop()
     if (exitReason == EXIT) {
         exit(0);
     } else if (exitReason == CHANGE_LIB) {
-        // sleep(1);
         if (_displayLib == NCURSES)
             setDisplayLib(SFML);
         else
@@ -93,14 +92,19 @@ int ModulesDisplayer::getHighestY()
     int highestY = 0;
     ModulesDisplayer *tmp = this;
 
-    for (ModulesDisplayer *tmp = this; tmp; tmp = tmp->_prev)
-        ;
     while (tmp) {
         if (tmp->data->y > highestY)
             highestY = tmp->data->y;
         tmp = tmp->next;
     }
     return highestY;
+}
+
+ModulesDisplayer::~ModulesDisplayer()
+{
+    delete module;
+    if (next)
+        delete next;
 }
 
 ModulesDisplayer::ModulesDisplayer(ModuleType type, ModulesDisplayer *prev)

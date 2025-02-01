@@ -73,7 +73,8 @@ std::string CPU::getCPUUsage()
 
 DataContainer *CPU::getDatas()
 {
-    std::string cpuModel = getCPUModel();
-    DataContainer *data(new DataContainer(0, 10, cpuModel));
+    DataContainer *data(new DataContainer(0, 10, _model));
+    data->next = new DataContainer(0, 10, _cores);
+    data->next->next = new DataContainer(0, 10, _frequency);
     return data;
 }

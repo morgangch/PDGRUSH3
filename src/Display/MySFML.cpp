@@ -27,12 +27,12 @@ void MySFML::Init()
     _window =
         new sf::RenderWindow(sf::VideoMode(800, 600), "System Information");
     _window->setFramerateLimit(60);
-    _font = sf::Font();
-    _font.loadFromFile("font.ttf");
 }
 
 void createText(sf::Text *text)
 {
+    sf::Font _font;
+    _font.loadFromFile("font.ttf");
     text->setFont(_font);
     text->setCharacterSize(24);
     text->setFillColor(sf::Color::White);

@@ -15,6 +15,8 @@
 #include "./Module/Cpu.hpp"
 #include "./Module/Ram.hpp"
 
+class ModulesDisplayer;
+
 enum ExitReason { EXIT, CHANGE_LIB, NONE };
 
 class IDisplay : public Krell {

@@ -13,10 +13,15 @@
 
 class RAM : public IModule {
   public:
+    RAM() : _total(getTotalRAM()), _free(getFreeRAM()), _used(getUsedRAM()) {};
     std::string getTotalRAM();
     std::string getFreeRAM();
     std::string getUsedRAM();
-    DataContainer *getDatas();
+    DataContainer *getDatas() override;
+  private:
+    std::string _total;
+    std::string _free;
+    std::string _used;
 };
 
 #endif /* RAM_HPP_ */

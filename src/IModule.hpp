@@ -31,7 +31,7 @@ class IModule : public Krell {
     Coordinates bottom_right;
     int width;
     int height;
-    DataContainer *getDatas();
+    virtual DataContainer *getDatas() = 0;
   protected:
   private:
 };

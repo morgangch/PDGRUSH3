@@ -8,7 +8,7 @@
 #ifndef DISPLAYMANAGER_HPP_
 #define DISPLAYMANAGER_HPP_
 
-#include <../Supervisor.hpp>
+#include "../Supervisor.hpp"
 #include "../IDisplay.hpp"
 #include "MyNCurses.hpp"
 #include "MySFML.hpp"
@@ -58,9 +58,8 @@ class DisplayManager {
     void setDisplayLib(DisplayLib displayLib);
     IDisplay *getDisplay();
     IDisplay *getDisplayWithLib(DisplayLib displayLib);
-    int display();
     ModulesDisplayer *modules;
-
+    int display();
   protected:
   private:
     const DisplayLibList *_displayLibList;

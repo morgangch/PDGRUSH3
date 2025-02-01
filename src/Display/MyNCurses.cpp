@@ -10,10 +10,6 @@
 
 MyNCurses::MyNCurses()
 {
-    initscr();
-    noecho();
-    curs_set(0);
-    timeout(500);
 }
 
 MyNCurses::~MyNCurses()
@@ -25,6 +21,7 @@ void displayModules(ModulesDisplayer *modules)
 {
     MyNCurses ncursesInstance;
     for (ModulesDisplayer *tmp = modules; tmp; tmp = tmp->next) {
+        std::cout << tmp->data->value << std::endl;
         if (tmp->shouldDisplay())
             ncursesInstance.draw(tmp->data);
     }
@@ -32,8 +29,7 @@ void displayModules(ModulesDisplayer *modules)
 
 void MyNCurses::draw(DataContainer *data)
 {
-    if (data)
-        mvprintw(data->x, data->y, "%s\n", (data->value).c_str());
+    mvprintw(data->y, data->x, "%s\n", (data->value).c_str());
 }
 
 void MyNCurses::Init()
@@ -41,11 +37,11 @@ void MyNCurses::Init()
     initscr();
     noecho();
     curs_set(0);
+    timeout(500);
 }
 
 ExitReason MyNCurses::subLoop(ModulesDisplayer *modules)
 {
-    MyNCurses ncursesInstance;
     displayModules(modules);
     refresh();
 
