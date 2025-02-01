@@ -108,19 +108,13 @@ void DataManager::getDatavalues()
     setData(Hour, getHour());
     setData(Minute, getMinute());
     setData(Second, getSecond());
-    // setData(Uptime, getUptime());
-    // setData(CPU, getCPU());
-    // setData(RAM, getRAM());
-    // setData(Swap, getSwap());
-    // setData(Disk, getDisk());
-    // setData(Network, getNetwork());
-    // setData(Temperature, getTemperature());
-    // setData(Fan, getFan());
-    // setData(Voltage, getVoltage());
-    // setData(Load, getLoad());
-    // setData(Process, getProcess());
-    // setData(User, getUser());
-    // setData(Root, getRoot());
+    setData(CPUModel, getCPUModel());
+    setData(CPUCores, getCPUCores());
+    setData(CPUFrequency, getCPUFrequency());
+    setData(CPUUsage, getCPUUsage());
+    setData(TotalRAM, getTotalRAM());
+    setData(FreeRAM, getFreeRAM());
+    setData(UsedRAM, getUsedRAM());
 }
 
 std::string DataManager::getHostname()
@@ -190,6 +184,102 @@ std::string DataManager::getSecond()
     return std::string(buffer);
 }
 
+std::string DataManager::getCPUModel()
+{
+    std::ifstream cpuInfo("/proc/cpuinfo");
+    std::string line;
+
+    while (std::getline(cpuInfo, line)) {
+        if (line.find("model name") != std::string::npos)
+            return line.substr(line.find(":") + 2);
+    }
+    return "Unknown CPU Model";
+}
+
+std::string DataManager::getCPUCores()
+{
+    std::ifstream cpuInfo("/proc/cpuinfo");
+    std::string line;
+    int cores = 0;
+
+    while (std::getline(cpuInfo, line)) {
+        if (line.find("processor") != std::string::npos)
+            cores++;
+    }
+    return std::to_string(cores);
+}
+
+std::string DataManager::getCPUFrequency()
+{
+    std::ifstream cpuInfo("/proc/cpuinfo");
+    std::string line;
+
+    while (std::getline(cpuInfo, line)) {
+        if (line.find("cpu MHz") != std::string::npos)
+            return line.substr(line.find(":") + 2) + " MHz";
+    }
+    return "Unknown Frequency";
+}
+
+std::string DataManager::getCPUUsage()
+{
+    std::ifstream file("/proc/stat");
+    std::string line;
+
+    if (std::getline(file, line)) {
+        std::istringstream iss(line);
+        std::string cpu;
+        long user, nice, system, idle;
+        iss >> cpu >> user >> nice >> system >> idle;
+        long total = user + nice + system + idle;
+        long active = user + nice + system;
+        int percentage = (active * 100) / total;
+        return std::to_string(percentage) + "%";
+    }
+    return "Unknown";
+}
+
+std::string DataManager::getTotalRAM()
+{
+    std::ifstream memInfo("/proc/meminfo");
+    std::string line;
+
+    while (std::getline(memInfo, line)) {
+        if (line.find("MemTotal") != std::string::npos)
+            return line.substr(line.find(":") + 2);
+    }
+    return "Unknown";
+}
+
+std::string DataManager::getFreeRAM()
+{
+    std::ifstream memInfo("/proc/meminfo");
+    std::string line;
+
+    while (std::getline(memInfo, line)) {
+        if (line.find("MemFree") != std::string::npos)
+            return line.substr(line.find(":") + 2);
+    }
+    return "Unknown";
+}
+
+std::string DataManager::getUsedRAM()
+{
+    std::ifstream memInfo("/proc/meminfo");
+    std::string line;
+    long total = 0, free = 0;
+
+    while (std::getline(memInfo, line)) {
+        if (line.find("MemTotal") != std::string::npos) {
+            total = std::stol(line.substr(line.find(":") + 2));
+        } else if (line.find("MemFree") != std::string::npos) {
+            free = std::stol(line.substr(line.find(":") + 2));
+        }
+    }
+    long used = total - free;
+    return std::to_string(used) + " kB";
+}
+
 // int main()
 // {
 //     DataManager dataManager;
@@ -202,5 +292,12 @@ std::string DataManager::getSecond()
 //     std::cout << dataManager.getData(Hour) << std::endl;
 //     std::cout << dataManager.getData(Minute) << std::endl;
 //     std::cout << dataManager.getData(Second) << std::endl;
+//     std::cout << dataManager.getData(CPUModel) << std::endl;
+//     std::cout << dataManager.getData(CPUCores) << std::endl;
+//     std::cout << dataManager.getData(CPUFrequency) << std::endl;
+//     std::cout << dataManager.getData(CPUUsage) << std::endl;
+//     std::cout << dataManager.getData(TotalRAM) << std::endl;
+//     std::cout << dataManager.getData(FreeRAM) << std::endl;
+//     std::cout << dataManager.getData(UsedRAM) << std::endl;
 //     return 0;
 // }

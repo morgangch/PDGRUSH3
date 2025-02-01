@@ -15,6 +15,8 @@
 #include <pwd.h>
 #include <sys/utsname.h>
 #include <ctime>
+#include <fstream>
+#include <sstream>
 
 enum DataType {
     Hostname,
@@ -25,19 +27,13 @@ enum DataType {
     Hour,
     Minute,
     Second,
-    Uptime,
-    CPU,
-    RAM,
-    Swap,
-    Disk,
-    Network,
-    Temperature,
-    Fan,
-    Voltage,
-    Load,
-    Process,
-    User,
-    Root
+    CPUModel,
+    CPUCores,
+    CPUFrequency,
+    CPUUsage,
+    TotalRAM,
+    FreeRAM,
+    UsedRAM
 };
 
 class Datadictionnary {
@@ -71,18 +67,11 @@ class DataManager {
     std::string getHour();
     std::string getMinute();
     std::string getSecond();
-    // std::string getUptime();
-    // std::string getCPU();
-    // std::string getRAM();
-    // std::string getSwap();
-    // std::string getDisk();
-    // std::string getNetwork();
-    // std::string getTemperature();
-    // std::string getFan();
-    // std::string getVoltage();
-    // std::string getLoad();
-    // std::string getProcess();
-    // std::string getUser();
-    // std::string getRoot();
-
+    std::string getCPUModel();
+    std::string getCPUCores();
+    std::string getCPUFrequency();
+    std::string getCPUUsage();
+    std::string getTotalRAM();
+    std::string getFreeRAM();
+    std::string getUsedRAM();
 };
