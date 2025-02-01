@@ -13,21 +13,40 @@ MySFML::MySFML()
 
 void MySFML::draw()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "System Information");
-    sf::Text text("Hostname: " + hostUser.getHostname(), sf::Font(), 50);
+    sf::Text text;
+    text.setString("Hostname: " + hostUser.getHostname());
     text.setFillColor(sf::Color::Red);
     text.setPosition(100, 100);
-
-    while (window.isOpen()) {
-        window.clear();
-        window.draw(text);
-        window.display();
-    }
+    _window->draw(text);
 }
 
 void MySFML::Init()
 {
-    sf::Window window(sf::VideoMode({800, 600}), "System Information");
-    sf::CircleShape shape(50);
-    shape.setFillColor(sf::Color(100, 250, 50));
+    _window =
+        new sf::RenderWindow(sf::VideoMode(800, 600), "System Information");
+}
+
+ExitReason MySFML::subLoop()
+{
+
+    if (_window->isOpen()) {
+        _window->clear();
+        draw();
+        _window->display();
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+            _window->close();
+            return EXIT;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
+            _window->close();
+            return CHANGE_LIB;
+        }
+        if (sf::Event event; _window->pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                _window->close();
+                return EXIT;
+            }
+        }
+    }
+    return NONE;
 }

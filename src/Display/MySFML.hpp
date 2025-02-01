@@ -21,9 +21,10 @@ class MySFML : virtual public IDisplay {
         ~MySFML() = default;
         void draw() override;
         void Init() override;
-
+        ExitReason subLoop() override;
     protected:
     private:
+        sf::RenderWindow *_window;
 };
 
 #endif /* !MYSFML_HPP_ */

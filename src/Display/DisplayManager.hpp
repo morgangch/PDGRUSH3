@@ -11,6 +11,7 @@
 #include "../IDisplay.hpp"
 #include "MyNCurses.hpp"
 #include "MySFML.hpp"
+#include <../Supervisor.hpp>
 
 enum DisplayLib {
     NCURSES, // TUI

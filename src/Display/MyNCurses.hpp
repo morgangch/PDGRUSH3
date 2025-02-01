@@ -20,6 +20,7 @@ class MyNCurses : public IDisplay {
         ~MyNCurses();
         void draw() override;
         void Init() override;
+        ExitReason subLoop() override;
     private:
 };
 

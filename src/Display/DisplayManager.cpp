@@ -17,6 +17,8 @@ DisplayManager::DisplayManager(DisplayLib displayLib)
 
 DisplayManager::~DisplayManager()
 {
+    delete _displayLibList;
+    delete currentDisplay;
 }
 
 int DisplayManager::display()
@@ -59,13 +61,26 @@ IDisplay *DisplayManager::getDisplayWithLib(DisplayLib displayLib)
 
 void DisplayManager::setDisplayLib(DisplayLib displayLib)
 {
+    std::cout << "Changing lib : " << ((displayLib == NCURSES) ? "NCURSES" : "SFML") << std::endl;
     currentDisplay = getDisplayWithLib(displayLib);
-    displayLib = displayLib;
+    _displayLib = displayLib;
 }
 
 void DisplayManager::loop()
 {
-    while (true) {
-        currentDisplay->draw();
+    ExitReason exitReason = NONE;
+    while (exitReason == NONE) {
+        exitReason = currentDisplay->subLoop();
+    }
+    if (exitReason == EXIT) {
+        exit(0);
+    } else if (exitReason == CHANGE_LIB) {
+        if (_displayLib == NCURSES) {
+            setDisplayLib(SFML);
+        } else {
+            setDisplayLib(NCURSES);
+        }
+        this->currentDisplay->Init();
+        return loop();
     }
 }
