@@ -65,4 +65,7 @@ void DisplayManager::setDisplayLib(DisplayLib displayLib)
 
 void DisplayManager::loop()
 {
+    while (true) {
+        currentDisplay->draw();
+    }
 }

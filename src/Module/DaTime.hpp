@@ -9,14 +9,19 @@
 #define DATIME_HPP_
 
 #include "../IModule.hpp"
+#include <string>
 
 class DaTime : public IModule {
     public:
         DaTime();
         ~DaTime();
+        void display() override;
+        void draw() override;
+        std::string getDateTime() const;  // ✅ Added Getter
 
-    protected:
     private:
+        std::string dateTime;
+        void fetchData();
 };
 
 #endif /* !DATIME_HPP_ */

@@ -9,14 +9,21 @@
 #define OSKER_HPP_
 
 #include "../IModule.hpp"
+#include <string>
 
 class OSKer : public IModule {
     public:
         OSKer();
         ~OSKer();
+        void display() override;
+        void draw() override;
+        std::string getOSName() const;
+        std::string getKernelVersion() const;
 
-    protected:
     private:
+        std::string osName;
+        std::string kernelVersion;
+        void fetchData();
 };
 
 #endif /* !OSKER_HPP_ */
