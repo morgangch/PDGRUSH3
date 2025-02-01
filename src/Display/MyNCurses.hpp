@@ -22,6 +22,16 @@ class MyNCurses : public IDisplay {
         void Init() override;
         ExitReason subLoop() override;
     private:
+    bool _isRunning;
+    bool _showName = true;
+    bool _showOS = true;
+    bool _showDateTime = true;
+
+    bool _showCPU = true;
+
+    bool _showRAM = true;
+
+    int _yPos = 4;
 };
 
 #endif /* !MYNCURSES_HPP_ */
