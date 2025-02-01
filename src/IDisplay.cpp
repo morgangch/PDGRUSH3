@@ -6,12 +6,3 @@
 */
 
 #include "IDisplay.hpp"
-
-IDisplay::IDisplay()
-{
-}
-
-IDisplay::~IDisplay()
-{
-}
-

@@ -9,20 +9,38 @@
 #define DISPLAYMANAGER_HPP_
 
 #include "../IDisplay.hpp"
-#include "NCurses.hpp"
+#include "MyNCurses.hpp"
+#include "MySFML.hpp"
+
+enum DisplayLib {
+    NCURSES, // TUI
+    SFML     // GUI
+};
+
+class DisplayLibList {
+  public:
+    DisplayLibList(DisplayLib lib);
+    ~DisplayLibList();
+    IDisplay *display;
+    DisplayLib displayLib;
+    DisplayLibList *next;
+};
 
 class DisplayManager {
-    public:
-        DisplayManager(bool tui);
-        ~DisplayManager();
+  public:
+    DisplayManager(DisplayLib displayLib);
+    ~DisplayManager();
+    void loop();
+    void setDisplayLib(DisplayLib displayLib);
+    IDisplay *getDisplay();
+    IDisplay *getDisplayWithLib(DisplayLib displayLib);
+    int display();
 
-        bool isTui() { return _tui; }
-
-        int display();
-
-    protected:
-    private:
-        bool _tui;
+  protected:
+  private:
+    const DisplayLibList *_displayLibList;
+    DisplayLib _displayLib;
+    IDisplay *currentDisplay;
 };
 
 #endif /* !DISPLAYMANAGER_HPP_ */

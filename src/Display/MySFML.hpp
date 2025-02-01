@@ -5,20 +5,19 @@
 ** NCurses
 */
 
-#ifndef NCURSES_HPP_
-#define NCURSES_HPP_
+#ifndef MYSFML_HPP_
+#define MYSFML_HPP_
 
 #include "DisplayManager.hpp"
 
-class NCurses {
+class MySFML : virtual public IDisplay {
     public:
-        NCurses();
-        ~NCurses();
-
-        void display();
+        MySFML();
+        ~MySFML() = default;
+        void draw();
 
     protected:
     private:
 };
 
-#endif /* !NCURSES_HPP_ */
+#endif /* !MYSFML_HPP_ */

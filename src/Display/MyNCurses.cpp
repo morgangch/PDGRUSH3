@@ -5,17 +5,13 @@
 ** NCurses
 */
 
-#include "NCurses.hpp"
+#include "MyNCurses.hpp"
 
-NCurses::NCurses()
+MyNCurses::MyNCurses()
 {
 }
 
-NCurses::~NCurses()
-{
-}
-
-void NCurses::display()
+void MyNCurses::draw()
 {
     // Display the displayManager
 }

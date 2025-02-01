@@ -8,15 +8,14 @@
 #ifndef IDISPLAY_HPP_
 #define IDISPLAY_HPP_
 
-#include "Krell.hpp"
+#include "../Krell.hpp"
 
 class IDisplay : public Krell {
-    public:
-        IDisplay();
-        ~IDisplay();
-
-    protected:
-    private:
+  public:
+    virtual ~IDisplay() = default;
+    virtual void draw() = 0;
+  protected:
+  private:
 };
 
 #endif /* !IDISPLAY_HPP_ */

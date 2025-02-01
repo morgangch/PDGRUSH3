@@ -13,13 +13,12 @@
 class Krell {
     public:
         virtual ~Krell() = default;
-
         class IModule {};
         class IDisplay {};
-        virtual void display() = 0;
+        virtual void draw() = 0;
 
     protected:
-        virtual bool _isTui() = 0; // TUI = Text User Interface || If true, use nCurses, else use SFML
+        //virtual bool _isTui() = 0; // TUI = Text User Interface || If true, use nCurses, else use SFML
 };
 
 

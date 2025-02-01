@@ -10,6 +10,6 @@
 
 int supervisor(bool tui)
 {
-    DisplayManager displayManager(tui);
+    DisplayManager displayManager(tui ? NCURSES : SFML);
     return 0;
 }
