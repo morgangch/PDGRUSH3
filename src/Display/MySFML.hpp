@@ -25,6 +25,7 @@ class MySFML : virtual public IDisplay {
     protected:
     private:
         sf::RenderWindow *_window;
+        sf::Font _font;
 };
-
+        void createText(sf::Text *text);
 #endif /* !MYSFML_HPP_ */

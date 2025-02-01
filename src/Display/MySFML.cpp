@@ -15,9 +15,8 @@ void MySFML::draw(DataContainer *data)
 {
     if (data) {
         sf::Text text;
+        createText(&text);
         text.setString(data->value);
-        text.setCharacterSize(24);
-        text.setFillColor(sf::Color::White);
         text.setPosition(data->x, data->y);
         _window->draw(text);
     }
@@ -28,6 +27,15 @@ void MySFML::Init()
     _window =
         new sf::RenderWindow(sf::VideoMode(800, 600), "System Information");
     _window->setFramerateLimit(60);
+    _font = sf::Font();
+    _font.loadFromFile("font.ttf");
+}
+
+void createText(sf::Text *text)
+{
+    text->setFont(_font);
+    text->setCharacterSize(24);
+    text->setFillColor(sf::Color::White);
 }
 
 ExitReason keyPress(sf::RenderWindow *window)
