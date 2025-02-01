@@ -6,11 +6,45 @@
 */
 
 #include "OSKer.hpp"
+#include <iostream>
+#include <sys/utsname.h>
 
 OSKer::OSKer()
 {
+    fetchData();
 }
 
-OSKer::~OSKer()
+OSKer::~OSKer() {}
+
+void OSKer::fetchData()
 {
+    struct utsname buffer;
+
+    if (uname(&buffer) == 0) {
+        osName = buffer.sysname;
+        kernelVersion = buffer.release;
+    } else {
+        osName = "Unknown";
+        kernelVersion = "Unknown";
+    }
+}
+
+void OSKer::display()
+{
+    std::cout << "OS: " << osName << "\nKernel: " << kernelVersion << std::endl;
+}
+
+void OSKer::draw()
+{
+    display();
+}
+
+std::string OSKer::getOSName() const
+{
+    return osName;
+}
+
+std::string OSKer::getKernelVersion() const
+{
+    return kernelVersion;
 }

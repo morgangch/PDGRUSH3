@@ -9,15 +9,21 @@
 #define MYNCURSES_HPP_
 
 #include "DisplayManager.hpp"
+#include <ncurses.h>
+#include "../Module/HostUser.hpp"
+#include "../Module/OSKer.hpp"
+#include "../Module/DaTime.hpp"
 
-class MyNCurses : virtual public IDisplay {
+class MyNCurses : public IDisplay {
     public:
         MyNCurses();
-        ~MyNCurses() = default;
+        ~MyNCurses();
         void draw() override;
 
-    protected:
     private:
+        HostUser hostUser;
+        OSKer osKer;
+        DaTime daTime;
 };
 
 #endif /* !MYNCURSES_HPP_ */
