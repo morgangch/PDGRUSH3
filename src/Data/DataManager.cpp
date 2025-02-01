@@ -117,6 +117,40 @@ void DataManager::getDatavalues()
     setData(UsedRAM, getUsedRAM());
 }
 
+void DataManager::RefreshHost()
+{
+    setData(Hostname, getHostname());
+}
+
+void DataManager::RefreshOS()
+{
+    setData(OS_name, getOSName());
+    setData(kernel_version, getKernelVersion());
+}
+
+void DataManager::RefreshDate()
+{
+    setData(Date, getDate());
+    setData(Hour, getHour());
+    setData(Minute, getMinute());
+    setData(Second, getSecond());
+}
+
+void DataManager::RefreshCPU()
+{
+    setData(CPUModel, getCPUModel());
+    setData(CPUCores, getCPUCores());
+    setData(CPUFrequency, getCPUFrequency());
+    setData(CPUUsage, getCPUUsage());
+}
+
+void DataManager::RefreshRAM()
+{
+    setData(TotalRAM, getTotalRAM());
+    setData(FreeRAM, getFreeRAM());
+    setData(UsedRAM, getUsedRAM());
+}
+
 std::string DataManager::getHostname()
 {
     char hostname[1024];

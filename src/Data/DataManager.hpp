@@ -55,6 +55,11 @@ class DataManager {
     std::string getData(DataType type);
     void getDatavalues();
     void Refresh();
+    void RefreshHost();
+    void RefreshOS();
+    void RefreshDate();
+    void RefreshCPU();
+    void RefreshRAM();
 
   protected:
   private:
