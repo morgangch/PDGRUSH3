@@ -19,12 +19,11 @@ void MySFML::draw(DataContainer *data)
     createText(&text);
     text.setString(data->value);
     text.setPosition(data->x * 0, data->y * 30);
-    if (!data->next) {
-        _window->draw(text);
-        return;
-    }
     _window->draw(text);
-    draw(data->next);
+    if (data->next) {
+        data->next->y = data->y + 1;
+        draw(data->next);
+    }
 }
 
 void MySFML::Init()

@@ -11,11 +11,13 @@
 std::string RAM::getTotalRAM()
 {
     std::ifstream memInfo("/proc/meminfo");
-    std::string line;
+    std::string line, label, value;
 
     while (std::getline(memInfo, line)) {
-        if (line.find("MemTotal") != std::string::npos)
-            return line.substr(line.find(":") + 2);
+        std::istringstream iss(line);
+        iss >> label >> value; // Ignore le label "MemTotal:" et récupère uniquement la valeur
+        if (label == "MemTotal:")
+            return value + " kB"; // Ajoute "kB" pour garder l'unité
     }
     return "Unknown";
 }
@@ -23,11 +25,13 @@ std::string RAM::getTotalRAM()
 std::string RAM::getFreeRAM()
 {
     std::ifstream memInfo("/proc/meminfo");
-    std::string line;
+    std::string line, label, value;
 
     while (std::getline(memInfo, line)) {
-        if (line.find("MemFree") != std::string::npos)
-            return line.substr(line.find(":") + 2);
+        std::istringstream iss(line);
+        iss >> label >> value; // Ignore le label "MemTotal:" et récupère uniquement la valeur
+        if (label == "MemFree:")
+            return value + " kB"; // Ajoute "kB" pour garder l'unité
     }
     return "Unknown";
 }

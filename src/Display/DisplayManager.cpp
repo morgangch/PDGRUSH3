@@ -132,7 +132,7 @@ ModulesDisplayer::ModulesDisplayer(ModuleType type, ModulesDisplayer *prev)
             break;
         case E_RAM:
             module = new RAM;
-            next = nullptr;
+            next = new ModulesDisplayer(E_POW, this);
             break;
         case E_POW:
             module = new Power;
