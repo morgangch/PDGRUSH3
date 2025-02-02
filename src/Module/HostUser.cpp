@@ -19,10 +19,11 @@ void HostUser::fetchData()
 {
     char host[256];
     gethostname(host, sizeof(host));
-    hostname = std::string(host);
+    hostname = "Hostname: " + std::string(host);
 
     struct passwd *pw = getpwuid(getuid());
     username = (pw) ? std::string(pw->pw_name) : "Unknown";
+    username = "Username: " + username;
 }
 
 std::string HostUser::getHostname() const
