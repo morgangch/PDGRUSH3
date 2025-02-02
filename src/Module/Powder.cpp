@@ -31,6 +31,6 @@ void Power::update()
         _power = "Battery: " + _power + "%";
         file.close();
     } else {
-        _power = std::string("N/A");
+        _power = std::string("Battery: N/A");
     }
 }
