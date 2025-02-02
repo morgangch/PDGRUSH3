@@ -43,6 +43,7 @@ void MyNCurses::Init()
     noecho();
     curs_set(0);
     timeout(500);
+    halfdelay(2);
 }
 
 ExitReason MyNCurses::subLoop(ModulesDisplayer *modules)
