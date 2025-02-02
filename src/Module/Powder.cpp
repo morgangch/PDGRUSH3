@@ -25,9 +25,10 @@ DataContainer *Power::getDatas()
 
 void Power::update()
 {
-    std::ifstream file("/sys/class/power_supply/BAT0/capacity");
+    std::ifstream file("/sys/class/power_supply/BAT1/capacity");
     if (file.is_open()) {
         file >> _power;
+        _power = "Battery: " + _power + "%";
         file.close();
     } else {
         _power = std::string("N/A");
