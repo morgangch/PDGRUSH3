@@ -20,6 +20,7 @@ class CPU : public IModule {
     std::string getCPUFrequency();
     std::string getCPUUsage();
     DataContainer *getDatas() override;
+    void update() override {};
   private:
     std::string _model;
     std::string _cores;

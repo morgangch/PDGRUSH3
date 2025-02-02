@@ -73,6 +73,10 @@ void DisplayManager::loop()
 {
     ExitReason exitReason = NONE;
     while (exitReason == NONE) {
+        for (ModulesDisplayer *tmp = modules; tmp; tmp = tmp->next) {
+            if (tmp->shouldDisplay())
+                tmp->module->update();
+        }
         exitReason = currentDisplay->subLoop(modules);
     }
     if (exitReason == EXIT) {

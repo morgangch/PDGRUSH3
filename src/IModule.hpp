@@ -32,6 +32,7 @@ class IModule : public Krell {
     int width;
     int height;
     virtual DataContainer *getDatas() = 0;
+    virtual void update() = 0;
   protected:
   private:
 };

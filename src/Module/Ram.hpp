@@ -18,6 +18,7 @@ class RAM : public IModule {
     std::string getFreeRAM();
     std::string getUsedRAM();
     DataContainer *getDatas() override;
+    void update() override {};
   private:
     std::string _total;
     std::string _free;

@@ -18,6 +18,7 @@ class DaTime : public IModule {
     ~DaTime();
     DataContainer *getDatas() override;
     std::string getDateTime() const;
+    void update() override;
 
   private:
     std::string dateTime;

@@ -319,20 +319,20 @@ std::string DataManager::getUsedRAM()
 // {
 //     DataManager dataManager;
 //     dataManager.Refresh();
-//     std::cout << dataManager.getData(Hostname) << std::endl;
-//     std::cout << dataManager.getData(username) << std::endl;
-//     std::cout << dataManager.getData(OS_name) << std::endl;
-//     std::cout << dataManager.getData(kernel_version) << std::endl;
-//     std::cout << dataManager.getData(Date) << std::endl;
-//     std::cout << dataManager.getData(Hour) << std::endl;
-//     std::cout << dataManager.getData(Minute) << std::endl;
-//     std::cout << dataManager.getData(Second) << std::endl;
-//     std::cout << dataManager.getData(CPUModel) << std::endl;
-//     std::cout << dataManager.getData(CPUCores) << std::endl;
-//     std::cout << dataManager.getData(CPUFrequency) << std::endl;
-//     std::cout << dataManager.getData(CPUUsage) << std::endl;
-//     std::cout << dataManager.getData(TotalRAM) << std::endl;
-//     std::cout << dataManager.getData(FreeRAM) << std::endl;
-//     std::cout << dataManager.getData(UsedRAM) << std::endl;
+//     std::cout << "Hostname: " << dataManager.getData(Hostname) << std::endl;
+//     std::cout << "Username: " << dataManager.getData(username) << std::endl;
+//     std::cout << "OS_name: " << dataManager.getData(OS_name) << std::endl;
+//     std::cout << "Kernel version: " << dataManager.getData(kernel_version) << std::endl;
+//     std::cout << "Date: " << dataManager.getData(Date) << std::endl;
+//     std::cout << "Hour: " << dataManager.getData(Hour) << std::endl;
+//     std::cout << "Minute: " << dataManager.getData(Minute) << std::endl;
+//     std::cout << "second: " << dataManager.getData(Second) << std::endl;
+//     std::cout << "CPU model: " << dataManager.getData(CPUModel) << std::endl;
+//     std::cout << "CPU cores: " << dataManager.getData(CPUCores) << std::endl;
+//     std::cout << "CPU frequency: " << dataManager.getData(CPUFrequency) << std::endl;
+//     std::cout << "CPU usage: " << dataManager.getData(CPUUsage) << std::endl;
+//     std::cout << "Total ram: " << dataManager.getData(TotalRAM) << std::endl;
+//     std::cout << "Free ram: " << dataManager.getData(FreeRAM) << std::endl;
+//     std::cout << "Used ram: " << dataManager.getData(UsedRAM) << std::endl;
 //     return 0;
 // }

@@ -21,6 +21,7 @@ class HostUser : public IModule {
     std::string getHostname() const;
     std::string getUsername() const;
     DataContainer *getDatas() override;
+    void update() override {};
 
   private:
     std::string hostname;
