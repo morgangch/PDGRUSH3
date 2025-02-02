@@ -24,12 +24,12 @@ class MySFML : virtual public IDisplay {
         ExitReason subLoop(ModulesDisplayer *modules) override;
         void displayModules(ModulesDisplayer *modules);
 
-
     protected:
     private:
         void createText(sf::Text *text);
         sf::RenderWindow *_window;
         sf::Font _font;
+        void onResize();
 };
 
 #endif /* !MYSFML_HPP_ */

@@ -62,15 +62,6 @@ ExitReason keyPress(sf::RenderWindow *window)
     return NONE;
 }
 
-// void MySFML::displaymodules(ModulesDisplayer *modules)
-// {
-//     MySFML sfmlInstance;
-//     for (ModulesDisplayer *tmp = modules; tmp; tmp = tmp->next) {
-//         if (tmp->shouldDisplay())
-//             sfmlInstance.draw(tmp->data);
-//     }
-// }
-
 ExitReason MySFML::subLoop(ModulesDisplayer *modules)
 {
     if (_window->isOpen()) {
@@ -89,9 +80,20 @@ ExitReason MySFML::subLoop(ModulesDisplayer *modules)
                 && keyPress(_window) != NONE) {
                 return keyPress(_window);
             }
+            if (event.type == sf::Event::Resized)
+                onResize();
         }
     }
     return NONE;
+}
+
+void MySFML::onResize()
+{
+    sf::Vector2u size = _window->getSize();
+    sf::View view = _window->getView();
+    view.setSize(size.x, size.y);
+    view.setCenter(size.x / 2, size.y / 2);
+    _window->setView(view);
 }
 
 void MySFML::displayModules(ModulesDisplayer *modules)
