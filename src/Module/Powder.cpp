@@ -10,6 +10,24 @@
 Power::Power()
 {
     update();
+    std::string manuf;
+    std::string model;
+
+    std::ifstream file("/sys/class/power_supply/BAT1/manufacturer");
+    if (file.is_open()) {
+        file >> manuf;
+        file.close();
+    } else {
+        manuf = std::string("Manufacturer: N/A");
+    }
+    std::ifstream file0("/sys/class/power_supply/BAT1/model_name");
+    if (file0.is_open()) {
+        file0 >> model;
+        file0.close();
+    } else {
+        model = std::string("Model: N/A");
+    }
+    _buildInfos = "Manufacturer/Model: " + manuf + "/" + model;
 }
 
 Power::~Power()

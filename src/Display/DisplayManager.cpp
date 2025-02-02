@@ -146,5 +146,23 @@ ModulesDisplayer::ModulesDisplayer(ModuleType type, ModulesDisplayer *prev)
     data = module->getDatas();
     data->y = getHighestY() + 2;
     _prev = prev;
+    type = moduleType;
     _isHidden = false;
+}
+
+
+void ModulesDisplayer::hideModule(ModuleType type, bool hidden)
+{
+    ModulesDisplayer *tmp = this;
+
+    while (tmp) {
+        if (tmp->moduleType == type) {
+            tmp->_isHidden = hidden;
+            return;
+        }
+        if (tmp->next)
+            tmp = tmp->next;
+        else
+            return;
+    }
 }

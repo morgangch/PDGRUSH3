@@ -45,6 +45,28 @@ void MyNCurses::Init()
     halfdelay(2);
 }
 
+void listenKeys(ModulesDisplayer *modules, int ch)
+{
+    if (ch == 'a') {
+        modules->hideModule(E_HOSTUSER, modules->shouldDisplay());
+    }
+    if (ch == 'z') {
+        modules->hideModule(E_OSKER, modules->shouldDisplay());
+    }
+    if (ch == 'e') {
+        modules->hideModule(E_DATIME, modules->shouldDisplay());
+    }
+    if (ch == 'r') {
+        modules->hideModule(E_CPU, modules->shouldDisplay());
+    }
+    if (ch == 't') {
+        modules->hideModule(E_RAM, modules->shouldDisplay());
+    }
+    if (ch == 'y') {
+        modules->hideModule(E_POW, modules->shouldDisplay());
+    }
+}
+
 ExitReason MyNCurses::subLoop(ModulesDisplayer *modules)
 {
     displayModules(modules);
@@ -59,5 +81,6 @@ ExitReason MyNCurses::subLoop(ModulesDisplayer *modules)
         endwin();
         return CHANGE_LIB;
     }
+    listenKeys(modules, ch);
     return NONE;
 }

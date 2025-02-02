@@ -46,6 +46,8 @@ class ModulesDisplayer {
     {
         return !_isHidden;
     }
+    void hideModule(ModuleType, bool hidden);
+    ModuleType moduleType;
 
   private:
     bool _isHidden;

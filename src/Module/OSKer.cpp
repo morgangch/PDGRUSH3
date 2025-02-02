@@ -27,6 +27,8 @@ void OSKer::fetchData()
         osName = "Unknown";
         kernelVersion = "Unknown";
     }
+    osName = "OS: " + osName;
+    kernelVersion = "Kernel v" + kernelVersion;
 }
 
 std::string OSKer::getOSName() const

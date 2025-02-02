@@ -29,7 +29,7 @@ void MySFML::draw(DataContainer *data)
 void MySFML::Init()
 {
     _window =
-        new sf::RenderWindow(sf::VideoMode(800, 600), "MyGKrellm");
+        new sf::RenderWindow(sf::VideoMode(800, 800), "MyGKrellm");
     _window->setFramerateLimit(4);
     this->_font.loadFromFile("font.ttf");
     if (!this->_font.loadFromFile("font.ttf")) {
