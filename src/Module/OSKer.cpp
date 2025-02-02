@@ -42,7 +42,7 @@ std::string OSKer::getKernelVersion() const
 DataContainer *OSKer::getDatas()
 {
     fetchData();
-    DataContainer *data(new DataContainer(0, 10, osName));
-    data->next = new DataContainer(0, 10, kernelVersion);
+    DataContainer *data(new DataContainer(0, 0, osName));
+    data->next = new DataContainer(0, 0, kernelVersion);
     return data;
 }

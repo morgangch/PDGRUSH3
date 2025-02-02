@@ -38,7 +38,7 @@ std::string HostUser::getUsername() const
 DataContainer *HostUser::getDatas()
 {
     fetchData();
-    DataContainer *data(new DataContainer(0, 10, hostname));
-    data->next = new DataContainer(0, 10, username);
+    DataContainer *data(new DataContainer(0, 0, hostname));
+    data->next = new DataContainer(0, 0, username);
     return data;
 }

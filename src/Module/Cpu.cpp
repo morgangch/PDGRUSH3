@@ -87,7 +87,7 @@ std::string CPU::getCPUUsage()
 
 DataContainer *CPU::getDatas()
 {
-    DataContainer *data(new DataContainer(0, 10, _format));
+    DataContainer *data(new DataContainer(0, 0, _format, 1));
 
     return data;
 }

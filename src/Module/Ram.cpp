@@ -51,8 +51,8 @@ std::string RAM::getUsedRAM()
 
 DataContainer *RAM::getDatas()
 {
-    DataContainer *data(new DataContainer(0, 10, _total));
-    data->next = new DataContainer(0, 10, _free);
-    data->next->next = new DataContainer(0, 10, _used);
+    DataContainer *data(new DataContainer(0, 0, _total, 3));
+    data->next = new DataContainer(0, 0, _free);
+    data->next->next = new DataContainer(0, 0, _used);
     return data;
 }

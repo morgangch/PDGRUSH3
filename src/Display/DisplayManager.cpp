@@ -98,7 +98,7 @@ int ModulesDisplayer::getHighestY()
 
     while (tmp) {
         if (tmp->data->y > highestY)
-            highestY = tmp->data->y;
+            highestY = tmp->data->y + tmp->data->size;
         tmp = tmp->next;
     }
     return highestY;
@@ -144,7 +144,7 @@ ModulesDisplayer::ModulesDisplayer(ModuleType type, ModulesDisplayer *prev)
             break;
     }
     data = module->getDatas();
-    data->y = getHighestY() + 1;
+    data->y = getHighestY() + 2;
     _prev = prev;
     _isHidden = false;
 }

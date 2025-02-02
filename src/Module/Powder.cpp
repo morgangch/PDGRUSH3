@@ -19,7 +19,7 @@ Power::~Power()
 
 DataContainer *Power::getDatas()
 {
-    DataContainer *data(new DataContainer(0, 30, _power));
+    DataContainer *data(new DataContainer(0, 0, _power));
     return data;
 }
 

@@ -29,12 +29,11 @@ void MyNCurses::draw(DataContainer *data)
 {
     if (!data)
         return;
-    if (!data->next) {
-        mvprintw(data->y, data->x, "%s", (data->value).c_str());
-        return;
-    }
     mvprintw(data->y, data->x, "%s", (data->value).c_str());
-    draw(data->next);
+    if (data->next) {
+        data->next->y = data->y + 1;
+        draw(data->next);
+    }
 }
 
 void MyNCurses::Init()
