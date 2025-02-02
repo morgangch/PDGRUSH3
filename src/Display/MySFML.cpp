@@ -13,13 +13,18 @@ MySFML::MySFML()
 
 void MySFML::draw(DataContainer *data)
 {
-    if (data) {
-        sf::Text text;
-        createText(&text);
-        text.setString(data->value);
-        text.setPosition(data->x, data->y);
+    if (!data)
+        return;
+    sf::Text text;
+    createText(&text);
+    text.setString(data->value);
+    text.setPosition(data->x * 0, data->y * 30);
+    if (!data->next) {
         _window->draw(text);
+        return;
     }
+    _window->draw(text);
+    draw(data->next);
 }
 
 void MySFML::Init()

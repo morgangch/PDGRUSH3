@@ -36,7 +36,7 @@ DisplayLibList::DisplayLibList(DisplayLib lib)
     } else if (lib == SFML) {
         display = (IDisplay *) new MySFML;
         displayLib = SFML;
-        next = nullptr; // Fin de la liste
+        next = nullptr;
     }
 }
 
