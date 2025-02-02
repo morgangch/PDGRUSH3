@@ -13,19 +13,20 @@
 
 class CPU : public IModule {
   public:
-    CPU() : _model(getCPUModel()), _cores(getCPUCores()), _frequency(getCPUFrequency()), _usage(getCPUUsage()) {};
+    CPU();
     ~CPU() = default;
     std::string getCPUModel();
     std::string getCPUCores();
     std::string getCPUFrequency();
     std::string getCPUUsage();
     DataContainer *getDatas() override;
-    void update() override {};
+    void update() override;
   private:
     std::string _model;
     std::string _cores;
     std::string _frequency;
     std::string _usage;
+    std::string _format;
 };
 
 #endif /* CPU_HPP_ */

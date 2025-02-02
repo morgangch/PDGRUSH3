@@ -21,7 +21,8 @@ void DaTime::fetchData()
 {
     std::time_t now = std::time(nullptr);
     char buf[80];
-    std::strftime(buf, sizeof(buf), "%d/%m/%Y %H:%M:%S", std::localtime(&now));
+    std::strftime(buf, sizeof(buf), "\n        %d/%m/%Y\n         %H:%M:%S\n",
+        std::localtime(&now));
     dateTime = buf;
 }
 

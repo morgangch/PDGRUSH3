@@ -30,10 +30,10 @@ void MyNCurses::draw(DataContainer *data)
     if (!data)
         return;
     if (!data->next) {
-        mvprintw(data->y, 0, "%s", (data->value).c_str());
+        mvprintw(data->y, data->x, "%s", (data->value).c_str());
         return;
     }
-    mvprintw(data->y, 0, "%s", (data->value).c_str());
+    mvprintw(data->y, data->x, "%s", (data->value).c_str());
     draw(data->next);
 }
 

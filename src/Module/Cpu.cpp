@@ -9,6 +9,11 @@
 #include <fstream>
 #include <sstream>
 
+CPU::CPU()
+{
+    update();
+}
+
 std::string CPU::getCPUModel()
 {
     std::ifstream cpuInfo("/proc/cpuinfo");
@@ -50,31 +55,48 @@ std::string CPU::getCPUUsage()
 {
     std::ifstream file("/proc/stat");
     std::string line;
+    std::getline(file, line);
+    std::istringstream ss(line);
 
-    if (std::getline(file, line)) {
-        std::istringstream iss(line);
-        std::string cpu;
-        long user, nice, system, idle;
-        iss >> cpu >> user >> nice >> system >> idle;
-        long total = user + nice + system + idle;
-        long active = user + nice + system;
-        int percentage = (active * 100) / total;
-        return std::to_string(percentage) + "%";
+    std::string cpu;
+    long user, nice, system, idle, iowait, irq, softirq, steal, guest, guest_nice;
+    ss >> cpu >> user >> nice >> system >> idle >> iowait >> irq >> softirq >> steal >> guest >> guest_nice;
+
+    long totalIdle = idle + iowait;
+    long totalNonIdle = user + nice + system + irq + softirq + steal;
+    long total = totalIdle + totalNonIdle;
+
+    static long prevTotal = 0;
+    static long prevIdle = 0;
+
+    long totald = total - prevTotal;
+    long idled = totalIdle - prevIdle;
+
+    prevTotal = total;
+    prevIdle = totalIdle;
+
+    float cpuUsage = 0.0;
+    if (totald != 0) {
+        cpuUsage = (totald - idled) * 100.0 / totald;
     }
-    return "N/A";
+    std::ostringstream oss;
+    oss.precision(2);
+    oss << std::fixed << cpuUsage;
+    return oss.str();
 }
-
-// void CPU::draw(std::function<void(DataContainer*)> func)
-// {
-//     std::string cpuModel = getCPUModel();
-//     DataContainer *data(new DataContainer(0, 10, cpuModel));
-//     func(data);
-// }
 
 DataContainer *CPU::getDatas()
 {
-    DataContainer *data(new DataContainer(0, 10, _model));
-    data->next = new DataContainer(0, 10, _cores);
-    data->next->next = new DataContainer(0, 10, _frequency);
+    DataContainer *data(new DataContainer(0, 10, _format));
+
     return data;
+}
+
+void CPU::update()
+{
+    _model = getCPUModel();
+    _cores = getCPUCores();
+    _frequency = getCPUFrequency();
+    _usage = getCPUUsage();
+    _format = "CPU: " + _model + " - " + _cores + " cores\n     " + _usage + "% - " + _frequency;
 }

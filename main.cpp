@@ -7,6 +7,8 @@
 
 #include "Krell.hpp"
 #include "src/Supervisor.hpp"
+#include "src/Module/Cpu.hpp"
+
 
 int main(int ac, char **av)
 {
