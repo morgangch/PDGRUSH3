@@ -17,19 +17,24 @@ MyNCurses::~MyNCurses()
     endwin();
 }
 
-void displayModules(ModulesDisplayer *modules)
+void MyNCurses::displayModules(ModulesDisplayer *modules)
 {
-    MyNCurses ncursesInstance;
     for (ModulesDisplayer *tmp = modules; tmp; tmp = tmp->next) {
-        std::cout << tmp->data->value << std::endl;
         if (tmp->shouldDisplay())
-            ncursesInstance.draw(tmp->data);
+            draw(tmp->data);
     }
 }
 
 void MyNCurses::draw(DataContainer *data)
 {
-    mvprintw(data->y, data->x, "%s\n", (data->value).c_str());
+    if (!data)
+        return;
+    if (!data->next) {
+        mvprintw(data->y, 0, "%s", (data->value).c_str());
+        return;
+    }
+    mvprintw(data->y, 0, "%s", (data->value).c_str());
+    draw(data->next);
 }
 
 void MyNCurses::Init()

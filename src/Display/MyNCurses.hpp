@@ -23,6 +23,7 @@ class MyNCurses : public IDisplay {
     ExitReason subLoop(ModulesDisplayer *modules) override;
 
   private:
+    void displayModules(ModulesDisplayer *modules);
 };
 
 #endif /* !MYNCURSES_HPP_ */
