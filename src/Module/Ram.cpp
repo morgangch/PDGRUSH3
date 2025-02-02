@@ -8,6 +8,11 @@
 #include "Ram.hpp"
 #include <fstream>
 
+RAM::RAM()
+{
+    update();
+}
+
 std::string RAM::getTotalRAM()
 {
     std::ifstream memInfo("/proc/meminfo");
@@ -17,7 +22,7 @@ std::string RAM::getTotalRAM()
         std::istringstream iss(line);
         iss >> label >> value; // Ignore le label "MemTotal:" et récupère uniquement la valeur
         if (label == "MemTotal:")
-            return value + " kB"; // Ajoute "kB" pour garder l'unité
+            return value + " kB Total";
     }
     return "Unknown";
 }
@@ -31,7 +36,7 @@ std::string RAM::getFreeRAM()
         std::istringstream iss(line);
         iss >> label >> value; // Ignore le label "MemTotal:" et récupère uniquement la valeur
         if (label == "MemFree:")
-            return value + " kB"; // Ajoute "kB" pour garder l'unité
+            return value;
     }
     return "Unknown";
 }
@@ -50,13 +55,34 @@ std::string RAM::getUsedRAM()
         }
     }
     long used = total - free;
-    return std::to_string(used) + " kB";
+    return std::to_string(used);
 }
 
 DataContainer *RAM::getDatas()
 {
-    DataContainer *data(new DataContainer(0, 0, _total, 3));
-    data->next = new DataContainer(0, 0, _free);
+    DataContainer *data = new DataContainer(0, 0, _header, 4);
+    data->next = new DataContainer(0, 0, _total);
     data->next->next = new DataContainer(0, 0, _used);
+    data->next->next->next = new DataContainer(0, 0, _free);
     return data;
+}
+
+void RAM::update()
+{
+    _total = getTotalRAM();
+    _free = getFreeRAM();
+    _used = getUsedRAM();
+    calculatePercentage();
+}
+
+void RAM::calculatePercentage()
+{
+    long total = std::stol(_total);
+    long used = std::stol(_used);
+    long free = std::stol(_free);
+
+    std::string usedPercentage = std::to_string((used * 100) / total);
+    std::string freePercentage = std::to_string((free * 100) / total);
+    _used += " kB Used (" + usedPercentage + "%)";
+    _free += " kB Free (" + freePercentage + "%)";
 }
