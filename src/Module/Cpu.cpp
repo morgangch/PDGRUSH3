@@ -98,5 +98,5 @@ void CPU::update()
     _cores = getCPUCores();
     _frequency = getCPUFrequency();
     _usage = getCPUUsage();
-    _format = "CPU: " + _model + " - " + _cores + " cores\nUSAGE: " + _usage + "% - " + _frequency;
+    _format = "CPU: " + _model + " - " + _cores + " cores\nUSAGE: " + _usage + "% - " + _frequency + "   ";
 }

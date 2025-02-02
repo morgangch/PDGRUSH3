@@ -20,6 +20,7 @@ class Power : public IModule {
 
     private:
         std::string _power;
+        std::string _buildInfos;
 };
 
 #endif /* !POWDER_HPP_ */
