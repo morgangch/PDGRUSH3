@@ -50,6 +50,10 @@ ExitReason keyPress(sf::RenderWindow *window)
         window->close();
         return CHANGE_LIB;
     }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+        window->close();
+        return EXIT;
+    }
     return NONE;
 }
 

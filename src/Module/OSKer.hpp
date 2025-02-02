@@ -18,6 +18,7 @@ class OSKer : public IModule {
     std::string getOSName() const;
     std::string getKernelVersion() const;
     DataContainer *getDatas() override;
+    void update() override {};
 
   private:
     std::string osName;

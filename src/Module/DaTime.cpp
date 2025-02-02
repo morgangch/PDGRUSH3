@@ -19,18 +19,11 @@ DaTime::~DaTime() {}
 
 void DaTime::fetchData()
 {
-    std::time_t t = std::time(nullptr);
-    char buffer[100];
-    std::strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", std::localtime(&t));
-    dateTime = std::string(buffer);
+    std::time_t now = std::time(nullptr);
+    char buf[80];
+    std::strftime(buf, sizeof(buf), "%d/%m/%Y %H:%M:%S", std::localtime(&now));
+    dateTime = buf;
 }
-
-// void DaTime::draw(std::function<void(DataContainer*)> func)
-// {
-//     fetchData();
-//     DataContainer *data(new DataContainer(0, 10, dateTime));
-//     func(data);
-// }
 
 std::string DaTime::getDateTime() const
 {
@@ -42,4 +35,9 @@ DataContainer *DaTime::getDatas()
     fetchData();
     DataContainer *data(new DataContainer(0, 10, dateTime));
     return data;
+}
+
+void DaTime::update()
+{
+    fetchData();
 }
