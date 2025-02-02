@@ -14,6 +14,7 @@
 #include "./Module/DaTime.hpp"
 #include "./Module/Cpu.hpp"
 #include "./Module/Ram.hpp"
+#include "./Module/Powder.hpp"
 
 class ModulesDisplayer;
 

@@ -8,9 +8,10 @@
 #ifndef IMODULE_HPP_
 #define IMODULE_HPP_
 
-#include "Krell.hpp"
-#include "DataContainer.hpp"
 #include <functional>
+#include <string>
+#include "DataContainer.hpp"
+#include "Krell.hpp"
 
 class Coordinates {
   public:

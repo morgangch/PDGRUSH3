@@ -18,7 +18,7 @@ enum DisplayLib {
     SFML     // GUI
 };
 
-enum ModuleType { E_HOSTUSER, E_OSKER, E_DATIME, E_CPU, E_RAM, E_NONE };
+enum ModuleType { E_HOSTUSER, E_OSKER, E_DATIME, E_CPU, E_RAM, E_POW, E_NONE };
 
 class DisplayLibList {
   public:
@@ -34,7 +34,8 @@ class ModulesDisplayer {
     ModulesDisplayer(
         ModuleType type = E_HOSTUSER, ModulesDisplayer *prev = nullptr);
     ~ModulesDisplayer();
-    void setHidden(bool isHidden);
+    void setHidden(bool isHidden) { _isHidden = isHidden; }
+    void toggleHidden() { _isHidden = !_isHidden; }
     IModule *module;
     DataContainer *data;
     ModulesDisplayer *next;

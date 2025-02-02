@@ -9,8 +9,6 @@
 #define DATIME_HPP_
 
 #include "../IModule.hpp"
-#include <string>
-#include <functional>
 
 class DaTime : public IModule {
   public:

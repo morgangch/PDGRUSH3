@@ -134,6 +134,10 @@ ModulesDisplayer::ModulesDisplayer(ModuleType type, ModulesDisplayer *prev)
             module = new RAM;
             next = nullptr;
             break;
+        case E_POW:
+            module = new Power;
+            next = nullptr;
+            break;
         default:
             module = nullptr;
             next = nullptr;
